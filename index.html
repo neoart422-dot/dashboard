@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>내 대시보드</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>" />
+</head>
+<body>
+  <!-- 로그인 (클라우드 모드에서만) -->
+  <section id="login" class="login" hidden>
+    <div class="card login-card">
+      <h1>📋 내 대시보드</h1>
+      <p class="muted">이메일로 받은 로그인 링크를 누르면 들어올 수 있어요.</p>
+      <form id="loginForm" class="col">
+        <input type="email" id="loginEmail" placeholder="이메일 주소" required autocomplete="email" />
+        <button class="btn">로그인 링크 받기</button>
+      </form>
+      <p class="hint" id="loginMsg"></p>
+    </div>
+  </section>
+
+  <!-- 대시보드 -->
+  <div id="app" hidden>
+    <header>
+      <h1>📋 내 대시보드</h1>
+      <nav>
+        <button class="active">홈</button>
+        <button disabled title="추가 예정">+ 탭</button>
+      </nav>
+      <div class="spacer"></div>
+      <span class="mode" id="mode"></span>
+      <button class="ghost" id="logout" hidden>로그아웃</button>
+    </header>
+
+    <main>
+      <section class="greeting">
+        <h2 id="greet">안녕하세요</h2>
+        <p id="today"></p>
+      </section>
+
+      <div class="grid">
+        <section class="card" style="grid-area: todo">
+          <div class="card-head">
+            <h3>✅ 오늘 할 일</h3>
+            <span class="badge" id="todoCount"></span>
+          </div>
+          <form class="row" id="todoForm">
+            <input type="text" id="todoInput" placeholder="할 일을 입력하고 Enter" autocomplete="off" />
+            <button class="btn">추가</button>
+          </form>
+          <div class="progress"><div id="todoBar"></div></div>
+          <ul id="todoList"></ul>
+          <div class="hint" id="todoCarry"></div>
+        </section>
+
+        <section class="card" style="grid-area: cal">
+          <div class="card-head">
+            <h3>📅 네이버 캘린더</h3>
+            <div class="cal-actions">
+              <button class="ghost" id="syncBtn" hidden>↻ 동기화</button>
+              <a class="ghost" href="https://calendar.naver.com" target="_blank" rel="noopener">열기 ↗</a>
+              <button class="ghost" id="icsBtn">.ics</button>
+              <input type="file" id="icsFile" accept=".ics,text/calendar" hidden />
+            </div>
+          </div>
+          <form class="row" id="evForm">
+            <input type="time" id="evTime" style="width: 120px" />
+            <input type="text" id="evTitle" placeholder="오늘 일정 빠르게 추가" autocomplete="off" />
+            <button class="btn">추가</button>
+          </form>
+          <div id="calList"></div>
+          <div class="hint" id="calSync"></div>
+        </section>
+
+        <section class="card" style="grid-area: idea">
+          <div class="card-head">
+            <h3>💡 아이디어 노트</h3>
+            <span class="badge" id="ideaCount"></span>
+          </div>
+          <form id="ideaForm">
+            <textarea id="ideaInput" placeholder="떠오른 아이디어를 적어두세요 (Ctrl+Enter로 저장)"></textarea>
+            <div class="idea-foot">
+              <input type="text" id="ideaSearch" placeholder="아이디어 검색" autocomplete="off" />
+              <button class="btn">저장</button>
+            </div>
+          </form>
+          <div class="ideas" id="ideaList"></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
